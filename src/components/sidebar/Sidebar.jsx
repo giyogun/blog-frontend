@@ -35,7 +35,7 @@ const Sidebar = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = "/images/";
   const { pathname } = location;
 
   const arr = pathname.split("/")[2];
@@ -44,7 +44,7 @@ const Sidebar = () => {
     if (arr) {
       queryPosts({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${arr}`,
+        url: `/api/posts/${arr}`,
       });
     }
   }, [queryPosts, arr]);
@@ -53,14 +53,13 @@ const Sidebar = () => {
     if (post.userId) {
       queryUser({
         method: "GET",
-        url: `http://localhost:5000/api/users/${post.userId}`,
+        url: `/api/users/${post.userId}`,
       });
     } else {
       return;
     }
     // console.log(1);
   }, [queryUser, post.userId]);
-
 
   const bio = userData ? userData : {};
 
@@ -108,7 +107,6 @@ const Sidebar = () => {
     </div>
   );
 
-
   return (
     <Fragment>
       <div className={classes.sidebar}>
@@ -124,9 +122,7 @@ const Sidebar = () => {
               alt=""
             />
           )}
-          {arr && (
-            <article>{bio.profileBio}</article>
-          )}
+          {arr && <article>{bio.profileBio}</article>}
         </div>
         <div className={classes.sidebarItem}>
           <span className={classes.sidebarTitle}>CATEGORIES</span>

@@ -4,8 +4,6 @@ import classes from "./Settings.module.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { ImUser } from "react-icons/im";
 import useApiCall from "../../hooks/useApiCall";
-import EditorContainer from "../../components/draftjs/EditorContainer";
-import RichEditor from "../../components/draftjs/RichEditor";
 import DeleteModal from "../../components/UI/DeleteModal";
 import PostsContext from "../../context/postsContext";
 
@@ -23,7 +21,7 @@ const Settings = () => {
   const twitterRef = useRef();
   const facebookRef = useRef();
   const linkedInRef = useRef();
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = "/images/";
 
   const userUpdate = useCallback((res) => {
     if (res.statusText === "OK") {
@@ -70,7 +68,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `http://localhost:5000/api/users/${ls._id}`,
+        url: `/api/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });
@@ -115,7 +113,7 @@ const Settings = () => {
       data.append("file", selectedFile);
       newUserInfo.profilePic = filename;
       uploadImageQuery({
-        url: `http://localhost:5000/api/upload`,
+        url: `/api/upload`,
         method: "POST",
         body: data,
       });
@@ -126,7 +124,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `http://localhost:5000/api/users/${ls._id}`,
+        url: `/api/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });

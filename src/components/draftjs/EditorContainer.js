@@ -32,7 +32,7 @@ const EditorContainer = ({ defaultValue, placeholder, value, inner }) => {
     if (postId) {
       singlePostQuery({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${postId}`,
+        url: `/api/posts/${postId}`,
       });
     }
   }, [singlePostQuery, postId]);

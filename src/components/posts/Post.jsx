@@ -38,7 +38,7 @@ const Post = () => {
 
   const history = useHistory();
 
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = "/images/";
 
   const filterPostsHandler = (cat) => {
     ctx.filterPosts(cat);

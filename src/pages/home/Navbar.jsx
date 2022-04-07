@@ -20,7 +20,7 @@ const Navbar = () => {
   const [x, setX] = useState("topnav");
   const [showModal, setShowModal] = useState(false);
   const ls = JSON.parse(localStorage.getItem("user"));
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = "/images/";
   const searchRef = useRef();
   const history = useHistory();
   let profilePic = <ImUser className="topImg" />;

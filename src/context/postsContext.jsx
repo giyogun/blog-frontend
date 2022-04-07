@@ -28,7 +28,7 @@ const PostsContext = React.createContext({
   deregister: () => {},
 });
 
-const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "http://localhost:5000/api";
 
 const capitalize = (text) => {
   const result = text.charAt(0).toUpperCase() + text.slice(1);
@@ -107,7 +107,7 @@ export const PostsProvider = (props) => {
       if (res.statusText === "OK") {
         setIsLoading(true);
         console.log("Post Deleted");
-        queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+        queryPosts({ method: "GET", url: `/api/posts` });
         history.replace("/");
       }
       setIsLoading(false);
@@ -171,7 +171,7 @@ export const PostsProvider = (props) => {
     if (res.statusText === "OK") {
       logoutHandler();
       console.log("User Deleted");
-      queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+      queryPosts({ method: "GET", url: `/api/posts` });
       // history.push("/register");
       setIsLoading(false);
     }
@@ -180,24 +180,24 @@ export const PostsProvider = (props) => {
   const { queryPosts: deleteUserQuery } = useApiCall(deregistration);
 
   useEffect(() => {
-    queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+    queryPosts({ method: "GET", url: `/api/posts` });
   }, [queryPosts]);
 
   useEffect(() => {
-    getCats({ method: "GET", url: `${BASE_URL}/categories` });
+    getCats({ method: "GET", url: `/api/categories` });
   }, [getCats]);
 
   const getPostsByUserHandler = (name) => {
     queryPostByUser({
       method: "GET",
-      url: `http://localhost:5000/api/posts?user=${name}`,
+      url: `/api/posts?user=${name}`,
     });
   };
 
   const createPostHandler = (config) => {
     createPostQuery({
       method: "POST",
-      url: `http://localhost:5000/api/posts/`,
+      url: `/api/posts/`,
       body: config,
     });
   };
@@ -206,7 +206,7 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     updatePostQuery({
       method: "PUT",
-      url: `http://localhost:5000/api/posts/${config.id}`,
+      url: `/api/posts/${config.id}`,
       body: config,
     });
   };
@@ -215,7 +215,7 @@ export const PostsProvider = (props) => {
     // setIsLoading(true);
     deletePostQuery({
       method: "DELETE",
-      url: `http://localhost:5000/api/posts/${config.id}`,
+      url: `/api/posts/${config.id}`,
       body: config,
     });
   };
@@ -223,7 +223,7 @@ export const PostsProvider = (props) => {
   const registrationHandler = (username, email, password) => {
     // setIsLoading(true);
     registerQuery({
-      url: `${BASE_URL}/auth/register`,
+      url: `/api/auth/register`,
       method: "POST",
       body: {
         username,
@@ -237,7 +237,7 @@ export const PostsProvider = (props) => {
     userLogin({
       method: "POST",
       body: { username, password: pass },
-      url: `${BASE_URL}/auth/login`,
+      url: `/api/auth/login`,
     });
   };
 
@@ -248,15 +248,15 @@ export const PostsProvider = (props) => {
 
   const filterPostsHandler = (category) => {
     setIsLoading(true);
-    filterPosts({ method: "GET", url: `${BASE_URL}/posts` }, category);
+    filterPosts({ method: "GET", url: `/api/posts` }, category);
   };
 
   const searchPostsHandler = (enteredText) => {
-    postsSearch({ method: "GET", url: `${BASE_URL}/posts` }, null, enteredText);
+    postsSearch({ method: "GET", url: `/api/posts` }, null, enteredText);
   };
 
   const resetPostsHandler = () => {
-    queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+    queryPosts({ method: "GET", url: `/api/posts` });
     setPosts1([]);
   };
 
@@ -265,14 +265,14 @@ export const PostsProvider = (props) => {
   };
 
   const getCategoriesHandler = () => {
-    getCats({ method: "GET", url: `${BASE_URL}/categories` });
+    getCats({ method: "GET", url: `/api/categories` });
   };
 
   const deleteUserHandler = (config) => {
     setIsLoading(true);
     deleteUserQuery({
       method: "DELETE",
-      url: `http://localhost:5000/api/users/${config.id}`,
+      url: `/api/users/${config.id}`,
       body: config,
     });
   };

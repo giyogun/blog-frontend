@@ -42,7 +42,7 @@ const ModalOverlay = () => {
     } else {
       singlePostQuery({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${postId}`,
+        url: `/api/posts/${postId}`,
       });
       setMessage("this post");
       setIsPost(true);
