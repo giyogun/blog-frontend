@@ -1,0 +1,13 @@
+/* .editor {
+  display: block;
+  align-items: center;
+  padding: 20px;
+  margin: 10px;
+} */
+
+.rdw-editor-toolbar {
+  position: sticky;
+  top: 55px;
+  /* overflow: hidden; */
+  z-index: 999;
+}

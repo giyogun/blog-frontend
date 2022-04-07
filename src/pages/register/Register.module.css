@@ -1,0 +1,126 @@
+.reg {
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  column-gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+}
+
+.regTitle {
+  font-size: 50px;
+}
+
+
+
+.regForm {
+  display: flex; 
+  column-gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 50%;
+  /* position:fixed; */
+  /* align-items: center;
+  top: 20em;
+  left: 12em;
+  /* align-items: center; */
+}
+
+.regForm .regInput {
+  /* min-width: 15rem; */
+  /* flex: 1; */
+}
+
+.regInput input,
+.regInput select {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  /* width: inherit; */
+  max-width: 100%;
+}
+
+/* .regInput input:focus {
+  outline: none;
+  border-color: #240370;
+  background-color: #e0d4fd;
+} */
+
+.regInput input,
+.regInput label {
+  display: block;
+  /* width: 90%; */
+}
+
+.regInput label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.regForm input:focus{
+  align-content: center;
+  outline: none;
+  border-color: teal;
+  background-color: rgb(232, 253, 253);
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.errorText {
+  color: #b40e0e;
+  margin-top: 10px;
+}
+
+.regInput {
+  margin-bottom: 1rem;
+}
+
+.regButton {
+  margin-top: 20px;
+  background-color: teal;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  /* max-width: 50%; */
+}
+
+.closeBtn {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.regSignIn {
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 40px;
+}
+
+.signInBtn {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+  background: transparent;
+  color: rgb(26, 137, 23);
+  cursor: pointer;
+}

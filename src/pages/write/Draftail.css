@@ -1,0 +1,93 @@
+.App {
+  font-family: sans-serif;
+  /* text-align: center; */
+  display: block;
+}
+/* Override default */
+.Draftail-Toolbar {
+  background: transparent !important;
+  border: none !important;
+}
+/* Override default */
+.Draftail-Editor {
+  border: none !important;
+  width: 60% !important;
+  /* margin-top: 100px !important; */
+  margin-left: 150px !important;
+  margin-right: auto !important;
+}
+/* Override default */
+.public-DraftEditor-content {
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+  font-size: 14px;
+  
+}
+/* Override default */
+.public-DraftEditorPlaceholder-inner {
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+  
+}
+
+.toolbar {
+  display:inline;
+  position:fixed;
+  z-index: 100;
+  top: 20px;
+  left: 50px;
+  background-color: teal;
+  /* height: 25px; */
+  /* height: 45px;
+  width: 220px; */
+  /* background-color: red; */
+  padding: 4px;
+  border-radius: .25rem;
+  /* transition: .2s; */
+}
+
+.bold {
+  margin-right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+
+}
+.bold:hover {
+  background-color: rgb(22, 236, 236);
+}
+
+.italic {
+  margin-right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+
+}
+.italic:hover {
+  background-color: rgb(22, 236, 236);
+}
+
+.under {
+  margin-right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+
+}
+.under:hover {
+  background-color: rgb(22, 236, 236);
+}
+
+.strike {
+  margin-right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+
+}
+.strike:hover {
+  background-color: rgb(22, 236, 236);
+}
+/* .toolbar .active {
+  display: flex;
+}
+
+.toolbar:active {
+  display: block;
+  
+} */

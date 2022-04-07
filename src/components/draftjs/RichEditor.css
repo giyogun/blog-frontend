@@ -1,0 +1,17 @@
+.rdw-editor-toolbar {
+  /* display: none; */
+}
+
+.rdw-editor-main {
+  color: gray;
+  font-size: 14px;
+  margin: 10px 0;
+  height: 100%;
+  border: none;
+  overflow: auto;
+  border-bottom: 1px solid lightgray;
+}
+.public-DraftEditor-content {
+  font-size: 14px;
+  max-width: 90%;
+}

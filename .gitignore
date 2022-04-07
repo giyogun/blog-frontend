@@ -1,0 +1,4 @@
+node_modules
+package-lock.json
+.eslintcache
+/src/components/posts/data.js

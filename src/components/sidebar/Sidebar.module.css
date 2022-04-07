@@ -1,0 +1,126 @@
+.sidebar {
+  flex: 3;
+  margin: 20px;
+  padding-bottom: 30px;
+  background-color: #fdfbfb;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebarItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.sidebarTitle {
+  margin: 10px;
+  padding: 5px;
+  width: 80%;
+  border-top: 1px solid #a7a4a4;
+  border-bottom: 1px solid #a7a4a4;
+  font-family: "Varela Round", sans-serif;
+  font-size: 12px;
+  color: #222;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+
+.sidebarItem img {
+  margin-top: 15px;
+  height: 300px;
+  width: 300px;
+}
+
+.sidebarItem article {
+  padding: 30px;
+  font-family: "Varela Round", sans-serif;
+  font-size: 12px;
+  white-space:pre-line;
+  line-height: 20px;
+}
+
+.sidebarList {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.sidebarList a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebarListItem {
+  display: inline-block;
+  width: 50%;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.sidebarSocial {
+  margin-top: 15px;
+  display: flex;
+  width: 250px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarIcon {
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+@media screen and (max-width: 780px) {
+  /* .sidebar .sidebarItem:not(:last-child) {
+    display: none;
+  } */
+
+  .sidebar {
+    display: block;
+    width: 95%;
+    margin-left: 10px;
+    padding-bottom: 30px;
+    background-color: #fdfbfb;
+    
+    /* margin: 0 auto; */
+  }
+
+  .sidebarTitle {
+    margin: 5px;
+    padding: 5px;
+    /* margin-right: 55px;
+    margin-left: 20px; */
+    border-top: hidden;
+    border-bottom: hidden;
+    font-family: "Varela Round", sans-serif;
+    text-align: center;
+  }
+
+  .sidebarSocial a {
+    margin-left: 30px;
+  }
+  .sidebarSocial {
+    display: block;
+    /* margin-left: 0; */
+  }
+
+  /* .sidebar .sidebarItem .foot {
+    display: block;
+    position: relative;
+    margin-top: 15px;
+  } */
+}
+
+/* @media (min-width: 1000px) {
+  .fullPost img {
+    height: 350px;
+    width: 75%;
+    object-fit: cover;
+  }
+} */

@@ -1,0 +1,158 @@
+.reg {
+  height: calc(100vh - 50px);
+  display: block;
+  flex-direction: column;
+  column-gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+}
+
+.reg p {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  color: #666;
+  
+}
+
+.reg h1 {
+  padding: 10px 0;
+  font-size: 32px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.reg hr {
+  color: #a9a9a9;
+  opacity: 0.3;
+  width: calc(100% - 24px);
+}
+
+.regInput input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  /* width: inherit; */
+  max-width: 100%;
+}
+
+.regForm input:focus {
+  align-content: center;
+  outline: none;
+  border-color: teal;
+  background-color: rgb(232, 253, 253);
+}
+
+.errorText {
+  color: #b40e0e;
+  margin-top: 10px;
+}
+
+.regForm {
+  top: 25%;
+  margin: 0 auto;
+  width: 50%;
+  position: relative;
+}
+
+label#icon {
+  margin: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+/* input[type="text"],
+input[type="email"], */
+.regForm input {
+  width: calc(100% - 57px);
+  height: 36px;
+  margin: 13px 0 0 -5px;
+  padding-left: 10px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #cbc9c9;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.09);
+  background: #fff;
+}
+
+
+/* input[type="email"].invalid, */
+.regForm input.invalid {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.regForm input.invalid:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+#icon {
+  display: inline-block;
+  padding: 8.9px 15px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.09);
+  background: teal;
+  color: #fff;
+  text-align: center;
+}
+.btn-block {
+  margin-top: 10px;
+  text-align: center;
+}
+.btn-submit {
+  width: 100%;
+  /* width: calc(100% - 24px); */
+  padding: 10px 0;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: none;
+  background: teal;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.btn-submit:hover {
+  background: rgb(13, 155, 155);
+}
+
+.regSignIn {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.signInBtn {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+  background: transparent;
+  color: rgb(26, 137, 23);
+  cursor: pointer;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.eye-icon {
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+  .regForm {
+    width: 70%;
+  }
+}
