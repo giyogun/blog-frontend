@@ -7,8 +7,10 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./EditorContainer.css";
 import { useLocation } from "react-router";
 import useApiCall from "../../hooks/useApiCall";
+import url from "../assets/backendUrl";
 
 // const ls = JSON.parse(localStorage.getItem("postData"));
+const BASE_URL = url;
 
 const EditorContainer = ({ defaultValue, placeholder, value, inner }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -32,7 +34,7 @@ const EditorContainer = ({ defaultValue, placeholder, value, inner }) => {
     if (postId) {
       singlePostQuery({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${postId}`,
+        url: `${BASE_URL}/posts/${postId}`,
       });
     }
   }, [singlePostQuery, postId]);

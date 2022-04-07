@@ -15,6 +15,9 @@ import {
 } from "react-icons/fa";
 import PostsContext from "../../context/postsContext";
 import useApiCall from "../../hooks/useApiCall";
+import url from "../assets/backendUrl";
+
+const BASE_URL = url;
 
 const Sidebar = () => {
   const [post, setPost] = useState({});
@@ -35,7 +38,7 @@ const Sidebar = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = `${BASE_URL}/images/`;
   const { pathname } = location;
 
   const arr = pathname.split("/")[2];
@@ -44,7 +47,7 @@ const Sidebar = () => {
     if (arr) {
       queryPosts({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${arr}`,
+        url: `${BASE_URL}/posts/${arr}`,
       });
     }
   }, [queryPosts, arr]);
@@ -53,7 +56,7 @@ const Sidebar = () => {
     if (post.userId) {
       queryUser({
         method: "GET",
-        url: `http://localhost:5000/api/users/${post.userId}`,
+        url: `${BASE_URL}/users/${post.userId}`,
       });
     } else {
       return;

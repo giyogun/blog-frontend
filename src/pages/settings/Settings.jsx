@@ -8,6 +8,9 @@ import EditorContainer from "../../components/draftjs/EditorContainer";
 import RichEditor from "../../components/draftjs/RichEditor";
 import DeleteModal from "../../components/UI/DeleteModal";
 import PostsContext from "../../context/postsContext";
+import url from "../../components/assets/backendUrl";
+
+const BASE_URL = url;
 
 const Settings = () => {
   const ctx = useContext(PostsContext);
@@ -23,7 +26,7 @@ const Settings = () => {
   const twitterRef = useRef();
   const facebookRef = useRef();
   const linkedInRef = useRef();
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = `${BASE_URL}/images/`;
 
   const userUpdate = useCallback((res) => {
     if (res.statusText === "OK") {
@@ -65,12 +68,11 @@ const Settings = () => {
       newUserInfo.password = password;
     }
 
-
     const canMakePostReq = !!email || !!password || selectedFile;
 
     if (canMakePostReq) {
       queryPosts({
-        url: `http://localhost:5000/api/users/${ls._id}`,
+        url: `${BASE_URL}/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });
@@ -115,7 +117,7 @@ const Settings = () => {
       data.append("file", selectedFile);
       newUserInfo.profilePic = filename;
       uploadImageQuery({
-        url: `http://localhost:5000/api/upload`,
+        url: `${BASE_URL}/upload`,
         method: "POST",
         body: data,
       });
@@ -126,7 +128,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `http://localhost:5000/api/users/${ls._id}`,
+        url: `${BASE_URL}/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });
@@ -197,7 +199,12 @@ const Settings = () => {
       <div className={classes.settingsWrapper}>
         <div className={classes.settingsTitle}>
           <span className={classes.settingsUpdateTitle}>Account Settings</span>
-          <span onClick={()=> ctx.modal()} className={classes.settingsDeleteTitle}>Delete Account</span>
+          <span
+            onClick={() => ctx.modal()}
+            className={classes.settingsDeleteTitle}
+          >
+            Delete Account
+          </span>
         </div>
         <form className={classes.settingsForm} onSubmit={updateInfoHandler}>
           <label>Username</label>

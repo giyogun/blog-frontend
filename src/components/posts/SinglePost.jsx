@@ -12,6 +12,7 @@ import PostsContext from "../../context/postsContext";
 import useApiCall from "../../hooks/useApiCall";
 import { Link } from "react-router-dom";
 import DeleteModal from "../UI/DeleteModal";
+import url from "../assets/backendUrl";
 
 const postDateHandler = (x) => {
   let displayedDate;
@@ -42,6 +43,8 @@ const postDateHandler = (x) => {
   return displayedDate;
 };
 
+const BASE_URL = url;
+
 const SinglePost = ({ singlePost: post, id: postId }) => {
   const ls = JSON.parse(localStorage.getItem("user"));
   const x = ls?._id;
@@ -51,7 +54,7 @@ const SinglePost = ({ singlePost: post, id: postId }) => {
   // const [post, setPost] = useState({});
   const [canEdit, setCanEdit] = useState(false);
   // const [pageIsFound, SetPageIsFound] = useState(false);
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = `${BASE_URL}/images/`;
 
   const ctx = useContext(PostsContext);
   const { isLoggedIn } = ctx;

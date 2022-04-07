@@ -14,13 +14,16 @@ import PostsContext from "../../context/postsContext";
 import { ImUser } from "react-icons/im";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import NavbarModal from "./modal/NavbarModal";
+import url from "../../components/assets/backendUrl";
+
+const BASE_URL = url;
 
 const Navbar = () => {
   const ctx = useContext(PostsContext);
   const [x, setX] = useState("topnav");
   const [showModal, setShowModal] = useState(false);
   const ls = JSON.parse(localStorage.getItem("user"));
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = `${BASE_URL}/images/`;
   const searchRef = useRef();
   const history = useHistory();
   let profilePic = <ImUser className="topImg" />;

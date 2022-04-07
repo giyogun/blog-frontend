@@ -1,9 +1,12 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import url from "../../components/assets/backendUrl";
 import SinglePost from "../../components/posts/SinglePost";
 import Sidebar from "../../components/sidebar/Sidebar";
 import useApiCall from "../../hooks/useApiCall";
 import classes from "./Single.module.css";
+
+const BASE_URL = url;
 
 const Single = () => {
   const [pageIsFound, setPageIsFound] = useState();
@@ -34,7 +37,7 @@ const Single = () => {
   useEffect(() => {
     singlePostQuery({
       method: "GET",
-      url: `http://localhost:5000/api/posts/${postId}`,
+      url: `${BASE_URL}/posts/${postId}`,
     });
   }, [singlePostQuery, postId]);
 

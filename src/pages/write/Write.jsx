@@ -8,6 +8,9 @@ import Select from "react-select";
 
 import classes from "./Write.module.css";
 import Card from "./ui/Card";
+import url from "../../components/assets/backendUrl";
+
+const BASE_URL = url;
 
 function Write(props) {
   const ls = JSON.parse(localStorage.getItem("user"));
@@ -24,7 +27,7 @@ function Write(props) {
   const [bodyText, setBodyText] = useState(null);
   const [rawBodyText, setRawBodyText] = useState(null);
   const postId = location.search.split("=")[1];
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = `${BASE_URL}/images/`;
 
   const uploadImage = useCallback((data) => {}, []);
   const { _id } = ls;
@@ -53,7 +56,7 @@ function Write(props) {
     if (postId) {
       singlePostQuery({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${postId}`,
+        url: `${BASE_URL}/posts/${postId}`,
       });
     }
   }, [singlePostQuery, postId]);
@@ -104,7 +107,7 @@ function Write(props) {
           // return;
         } else {
           uploadImageQuery({
-            url: `http://localhost:5000/api/upload`,
+            url: `${BASE_URL}/upload`,
             method: "POST",
             body: data,
           });
@@ -137,17 +140,17 @@ function Write(props) {
           return;
         } else {
           uploadImageQuery({
-            url: `http://localhost:5000/api/upload`,
+            url: `${BASE_URL}/upload`,
             method: "POST",
             body: data,
           });
         }
       }
       //  else {
-        ctx.createPost(newPost);
-        console.log(newPost);
-        // localStorage.setItem("testData", JSON.stringify(rawBodyText));
-        // localStorage.setItem("pData", JSON.stringify(newPost));
+      ctx.createPost(newPost);
+      console.log(newPost);
+      // localStorage.setItem("testData", JSON.stringify(rawBodyText));
+      // localStorage.setItem("pData", JSON.stringify(newPost));
       // }
     }
   };

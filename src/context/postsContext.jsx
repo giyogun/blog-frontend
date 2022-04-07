@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import url from "../components/assets/backendUrl";
 import useApiCall from "../hooks/useApiCall";
 
 const PostsContext = React.createContext({
@@ -28,7 +29,8 @@ const PostsContext = React.createContext({
   deregister: () => {},
 });
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = url;
+// const BASE_URL = "http://localhost:5000/api";
 
 const capitalize = (text) => {
   const result = text.charAt(0).toUpperCase() + text.slice(1);
@@ -190,14 +192,14 @@ export const PostsProvider = (props) => {
   const getPostsByUserHandler = (name) => {
     queryPostByUser({
       method: "GET",
-      url: `http://localhost:5000/api/posts?user=${name}`,
+      url: `${BASE_URL}/posts?user=${name}`,
     });
   };
 
   const createPostHandler = (config) => {
     createPostQuery({
       method: "POST",
-      url: `http://localhost:5000/api/posts/`,
+      url: `${BASE_URL}/posts/`,
       body: config,
     });
   };
@@ -206,7 +208,7 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     updatePostQuery({
       method: "PUT",
-      url: `http://localhost:5000/api/posts/${config.id}`,
+      url: `${BASE_URL}/posts/${config.id}`,
       body: config,
     });
   };
@@ -215,7 +217,7 @@ export const PostsProvider = (props) => {
     // setIsLoading(true);
     deletePostQuery({
       method: "DELETE",
-      url: `http://localhost:5000/api/posts/${config.id}`,
+      url: `${BASE_URL}/posts/${config.id}`,
       body: config,
     });
   };
@@ -272,7 +274,7 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     deleteUserQuery({
       method: "DELETE",
-      url: `http://localhost:5000/api/users/${config.id}`,
+      url: `${BASE_URL}/users/${config.id}`,
       body: config,
     });
   };

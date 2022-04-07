@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import { useLocation, useParams } from "react-router";
 import PostsContext from "../../context/postsContext";
 import useApiCall from "../../hooks/useApiCall";
+import url from "../assets/backendUrl";
 import styles from "../UI/DeleteModal.module.css";
 
 const userInfo = localStorage.getItem("user");
+const BASE_URL = url;
 
 const Backdrop = () => {
   const ctx = useContext(PostsContext);
@@ -42,7 +44,7 @@ const ModalOverlay = () => {
     } else {
       singlePostQuery({
         method: "GET",
-        url: `http://localhost:5000/api/posts/${postId}`,
+        url: `${BASE_URL}/posts/${postId}`,
       });
       setMessage("this post");
       setIsPost(true);

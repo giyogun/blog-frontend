@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import PostsContext from "../../context/postsContext";
+import url from "../assets/backendUrl";
 import classes from "./Post.module.css";
 
 const postDateHandler = (x) => {
@@ -33,12 +34,14 @@ const postDateHandler = (x) => {
   return displayedDate;
 };
 
+const BASE_URL = url;
+
 const Post = () => {
   const ctx = useContext(PostsContext);
 
   const history = useHistory();
 
-  const publicFolder = "http://localhost:5000/images/";
+  const publicFolder = `${BASE_URL}/images/`;
 
   const filterPostsHandler = (cat) => {
     ctx.filterPosts(cat);
