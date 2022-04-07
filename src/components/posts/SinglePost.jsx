@@ -54,7 +54,11 @@ const SinglePost = ({ singlePost: post, id: postId }) => {
   // const [post, setPost] = useState({});
   const [canEdit, setCanEdit] = useState(false);
   // const [pageIsFound, SetPageIsFound] = useState(false);
+<<<<<<< HEAD
   const publicFolder = `${BASE_URL}/images/`;
+=======
+  const publicFolder = "/images/";
+>>>>>>> 733ddc5
 
   const ctx = useContext(PostsContext);
   const { isLoggedIn } = ctx;

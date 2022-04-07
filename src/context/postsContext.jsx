@@ -29,7 +29,10 @@ const PostsContext = React.createContext({
   deregister: () => {},
 });
 
+<<<<<<< HEAD
 const BASE_URL = url;
+=======
+>>>>>>> 733ddc5
 // const BASE_URL = "http://localhost:5000/api";
 
 const capitalize = (text) => {
@@ -109,7 +112,7 @@ export const PostsProvider = (props) => {
       if (res.statusText === "OK") {
         setIsLoading(true);
         console.log("Post Deleted");
-        queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+        queryPosts({ method: "GET", url: `/api/posts` });
         history.replace("/");
       }
       setIsLoading(false);
@@ -173,7 +176,7 @@ export const PostsProvider = (props) => {
     if (res.statusText === "OK") {
       logoutHandler();
       console.log("User Deleted");
-      queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+      queryPosts({ method: "GET", url: `/api/posts` });
       // history.push("/register");
       setIsLoading(false);
     }
@@ -182,24 +185,32 @@ export const PostsProvider = (props) => {
   const { queryPosts: deleteUserQuery } = useApiCall(deregistration);
 
   useEffect(() => {
-    queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+    queryPosts({ method: "GET", url: `/api/posts` });
   }, [queryPosts]);
 
   useEffect(() => {
-    getCats({ method: "GET", url: `${BASE_URL}/categories` });
+    getCats({ method: "GET", url: `/api/categories` });
   }, [getCats]);
 
   const getPostsByUserHandler = (name) => {
     queryPostByUser({
       method: "GET",
+<<<<<<< HEAD
       url: `${BASE_URL}/posts?user=${name}`,
+=======
+      url: `/api/posts?user=${name}`,
+>>>>>>> 733ddc5
     });
   };
 
   const createPostHandler = (config) => {
     createPostQuery({
       method: "POST",
+<<<<<<< HEAD
       url: `${BASE_URL}/posts/`,
+=======
+      url: `/api/posts/`,
+>>>>>>> 733ddc5
       body: config,
     });
   };
@@ -208,7 +219,11 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     updatePostQuery({
       method: "PUT",
+<<<<<<< HEAD
       url: `${BASE_URL}/posts/${config.id}`,
+=======
+      url: `/api/posts/${config.id}`,
+>>>>>>> 733ddc5
       body: config,
     });
   };
@@ -217,7 +232,11 @@ export const PostsProvider = (props) => {
     // setIsLoading(true);
     deletePostQuery({
       method: "DELETE",
+<<<<<<< HEAD
       url: `${BASE_URL}/posts/${config.id}`,
+=======
+      url: `/api/posts/${config.id}`,
+>>>>>>> 733ddc5
       body: config,
     });
   };
@@ -225,7 +244,7 @@ export const PostsProvider = (props) => {
   const registrationHandler = (username, email, password) => {
     // setIsLoading(true);
     registerQuery({
-      url: `${BASE_URL}/auth/register`,
+      url: `/api/auth/register`,
       method: "POST",
       body: {
         username,
@@ -239,7 +258,7 @@ export const PostsProvider = (props) => {
     userLogin({
       method: "POST",
       body: { username, password: pass },
-      url: `${BASE_URL}/auth/login`,
+      url: `/api/auth/login`,
     });
   };
 
@@ -250,15 +269,15 @@ export const PostsProvider = (props) => {
 
   const filterPostsHandler = (category) => {
     setIsLoading(true);
-    filterPosts({ method: "GET", url: `${BASE_URL}/posts` }, category);
+    filterPosts({ method: "GET", url: `/api/posts` }, category);
   };
 
   const searchPostsHandler = (enteredText) => {
-    postsSearch({ method: "GET", url: `${BASE_URL}/posts` }, null, enteredText);
+    postsSearch({ method: "GET", url: `/api/posts` }, null, enteredText);
   };
 
   const resetPostsHandler = () => {
-    queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
+    queryPosts({ method: "GET", url: `/api/posts` });
     setPosts1([]);
   };
 
@@ -267,14 +286,18 @@ export const PostsProvider = (props) => {
   };
 
   const getCategoriesHandler = () => {
-    getCats({ method: "GET", url: `${BASE_URL}/categories` });
+    getCats({ method: "GET", url: `/api/categories` });
   };
 
   const deleteUserHandler = (config) => {
     setIsLoading(true);
     deleteUserQuery({
       method: "DELETE",
+<<<<<<< HEAD
       url: `${BASE_URL}/users/${config.id}`,
+=======
+      url: `/api/users/${config.id}`,
+>>>>>>> 733ddc5
       body: config,
     });
   };

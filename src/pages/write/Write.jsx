@@ -12,7 +12,7 @@ import url from "../../components/assets/backendUrl";
 
 const BASE_URL = url;
 
-function Write(props) {
+function Write() {
   const ls = JSON.parse(localStorage.getItem("user"));
   const ctx = useContext(PostsContext);
   const [selectedFile, setSelectedFile] = useState("");
@@ -27,7 +27,11 @@ function Write(props) {
   const [bodyText, setBodyText] = useState(null);
   const [rawBodyText, setRawBodyText] = useState(null);
   const postId = location.search.split("=")[1];
+<<<<<<< HEAD
   const publicFolder = `${BASE_URL}/images/`;
+=======
+  const publicFolder = "/images/";
+>>>>>>> 733ddc5
 
   const uploadImage = useCallback((data) => {}, []);
   const { _id } = ls;
@@ -56,7 +60,11 @@ function Write(props) {
     if (postId) {
       singlePostQuery({
         method: "GET",
+<<<<<<< HEAD
         url: `${BASE_URL}/posts/${postId}`,
+=======
+        url: `/api/posts/${postId}`,
+>>>>>>> 733ddc5
       });
     }
   }, [singlePostQuery, postId]);
@@ -107,7 +115,11 @@ function Write(props) {
           // return;
         } else {
           uploadImageQuery({
+<<<<<<< HEAD
             url: `${BASE_URL}/upload`,
+=======
+            url: `/api/upload`,
+>>>>>>> 733ddc5
             method: "POST",
             body: data,
           });
@@ -140,7 +152,11 @@ function Write(props) {
           return;
         } else {
           uploadImageQuery({
+<<<<<<< HEAD
             url: `${BASE_URL}/upload`,
+=======
+            url: `/api/upload`,
+>>>>>>> 733ddc5
             method: "POST",
             body: data,
           });
