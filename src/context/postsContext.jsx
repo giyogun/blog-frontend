@@ -29,10 +29,6 @@ const PostsContext = React.createContext({
   deregister: () => {},
 });
 
-<<<<<<< HEAD
-const BASE_URL = url;
-=======
->>>>>>> 733ddc5
 // const BASE_URL = "http://localhost:5000/api";
 
 const capitalize = (text) => {
@@ -195,22 +191,14 @@ export const PostsProvider = (props) => {
   const getPostsByUserHandler = (name) => {
     queryPostByUser({
       method: "GET",
-<<<<<<< HEAD
-      url: `${BASE_URL}/posts?user=${name}`,
-=======
       url: `/api/posts?user=${name}`,
->>>>>>> 733ddc5
     });
   };
 
   const createPostHandler = (config) => {
     createPostQuery({
       method: "POST",
-<<<<<<< HEAD
-      url: `${BASE_URL}/posts/`,
-=======
       url: `/api/posts/`,
->>>>>>> 733ddc5
       body: config,
     });
   };
@@ -219,11 +207,7 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     updatePostQuery({
       method: "PUT",
-<<<<<<< HEAD
-      url: `${BASE_URL}/posts/${config.id}`,
-=======
       url: `/api/posts/${config.id}`,
->>>>>>> 733ddc5
       body: config,
     });
   };
@@ -232,11 +216,7 @@ export const PostsProvider = (props) => {
     // setIsLoading(true);
     deletePostQuery({
       method: "DELETE",
-<<<<<<< HEAD
-      url: `${BASE_URL}/posts/${config.id}`,
-=======
       url: `/api/posts/${config.id}`,
->>>>>>> 733ddc5
       body: config,
     });
   };
@@ -293,11 +273,7 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     deleteUserQuery({
       method: "DELETE",
-<<<<<<< HEAD
-      url: `${BASE_URL}/users/${config.id}`,
-=======
       url: `/api/users/${config.id}`,
->>>>>>> 733ddc5
       body: config,
     });
   };

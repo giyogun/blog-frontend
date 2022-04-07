@@ -24,11 +24,7 @@ const Settings = () => {
   const twitterRef = useRef();
   const facebookRef = useRef();
   const linkedInRef = useRef();
-<<<<<<< HEAD
-  const publicFolder = `${BASE_URL}/images/`;
-=======
   const publicFolder = "/images/";
->>>>>>> 733ddc5
 
   const userUpdate = useCallback((res) => {
     if (res.statusText === "OK") {
@@ -74,11 +70,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-<<<<<<< HEAD
-        url: `${BASE_URL}/users/${ls._id}`,
-=======
         url: `/api/users/${ls._id}`,
->>>>>>> 733ddc5
         method: "PUT",
         body: newUserInfo,
       });
@@ -123,11 +115,7 @@ const Settings = () => {
       data.append("file", selectedFile);
       newUserInfo.profilePic = filename;
       uploadImageQuery({
-<<<<<<< HEAD
-        url: `${BASE_URL}/upload`,
-=======
         url: `/api/upload`,
->>>>>>> 733ddc5
         method: "POST",
         body: data,
       });
@@ -138,11 +126,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-<<<<<<< HEAD
-        url: `${BASE_URL}/users/${ls._id}`,
-=======
         url: `/api/users/${ls._id}`,
->>>>>>> 733ddc5
         method: "PUT",
         body: newUserInfo,
       });

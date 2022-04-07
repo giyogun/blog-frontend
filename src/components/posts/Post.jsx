@@ -41,11 +41,7 @@ const Post = () => {
 
   const history = useHistory();
 
-<<<<<<< HEAD
-  const publicFolder = `${BASE_URL}/images/`;
-=======
   const publicFolder = "/images/";
->>>>>>> 733ddc5
 
   const filterPostsHandler = (cat) => {
     ctx.filterPosts(cat);

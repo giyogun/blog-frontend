@@ -27,11 +27,7 @@ function Write() {
   const [bodyText, setBodyText] = useState(null);
   const [rawBodyText, setRawBodyText] = useState(null);
   const postId = location.search.split("=")[1];
-<<<<<<< HEAD
-  const publicFolder = `${BASE_URL}/images/`;
-=======
   const publicFolder = "/images/";
->>>>>>> 733ddc5
 
   const uploadImage = useCallback((data) => {}, []);
   const { _id } = ls;
@@ -60,11 +56,7 @@ function Write() {
     if (postId) {
       singlePostQuery({
         method: "GET",
-<<<<<<< HEAD
-        url: `${BASE_URL}/posts/${postId}`,
-=======
         url: `/api/posts/${postId}`,
->>>>>>> 733ddc5
       });
     }
   }, [singlePostQuery, postId]);
@@ -115,11 +107,7 @@ function Write() {
           // return;
         } else {
           uploadImageQuery({
-<<<<<<< HEAD
-            url: `${BASE_URL}/upload`,
-=======
             url: `/api/upload`,
->>>>>>> 733ddc5
             method: "POST",
             body: data,
           });
@@ -152,11 +140,7 @@ function Write() {
           return;
         } else {
           uploadImageQuery({
-<<<<<<< HEAD
-            url: `${BASE_URL}/upload`,
-=======
             url: `/api/upload`,
->>>>>>> 733ddc5
             method: "POST",
             body: data,
           });

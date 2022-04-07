@@ -38,11 +38,7 @@ const Sidebar = () => {
 
   const history = useHistory();
   const location = useLocation();
-<<<<<<< HEAD
-  const publicFolder = `${BASE_URL}/images/`;
-=======
   const publicFolder = "/images/";
->>>>>>> 733ddc5
   const { pathname } = location;
 
   const arr = pathname.split("/")[2];
@@ -51,11 +47,7 @@ const Sidebar = () => {
     if (arr) {
       queryPosts({
         method: "GET",
-<<<<<<< HEAD
-        url: `${BASE_URL}/posts/${arr}`,
-=======
         url: `/api/posts/${arr}`,
->>>>>>> 733ddc5
       });
     }
   }, [queryPosts, arr]);
@@ -64,11 +56,7 @@ const Sidebar = () => {
     if (post.userId) {
       queryUser({
         method: "GET",
-<<<<<<< HEAD
-        url: `${BASE_URL}/users/${post.userId}`,
-=======
         url: `/api/users/${post.userId}`,
->>>>>>> 733ddc5
       });
     } else {
       return;

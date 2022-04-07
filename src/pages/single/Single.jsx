@@ -37,11 +37,7 @@ const Single = () => {
   useEffect(() => {
     singlePostQuery({
       method: "GET",
-<<<<<<< HEAD
       url: `${BASE_URL}/posts/${postId}`,
-=======
-      url: `/api/posts/${postId}`,
->>>>>>> 733ddc5
     });
   }, [singlePostQuery, postId]);
 
