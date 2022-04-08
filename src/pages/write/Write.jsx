@@ -15,7 +15,10 @@ const BASE_URL = url;
 function Write() {
   const ls = JSON.parse(localStorage.getItem("user"));
   const ctx = useContext(PostsContext);
+  const [previewSource, setPreviewSource] = useState();
+  const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
+  const [imgRes, setImgRes] = useState({});
   const location = useLocation();
   const history = useHistory();
   const [post, setPost] = useState({});
@@ -27,9 +30,7 @@ function Write() {
   const [bodyText, setBodyText] = useState(null);
   const [rawBodyText, setRawBodyText] = useState(null);
   const postId = location.search.split("=")[1];
-  const publicFolder = "/images/";
 
-  const uploadImage = useCallback((data) => {}, []);
   const { _id } = ls;
 
   const getOnePost = useCallback(
@@ -41,7 +42,6 @@ function Write() {
         }
         setIsEditState(x);
         setPost(res.data);
-        console.log(res.data);
       } else {
         history.push("/write");
       }
@@ -50,7 +50,6 @@ function Write() {
   );
 
   const { queryPosts: singlePostQuery } = useApiCall(getOnePost);
-  const { queryPosts: uploadImageQuery } = useApiCall(uploadImage);
 
   useEffect(() => {
     if (postId) {
@@ -60,28 +59,12 @@ function Write() {
       });
     }
   }, [singlePostQuery, postId]);
-  console.log(bodyText);
 
   let errorMessage;
 
   const postHandler = (e) => {
     e.preventDefault();
     const newTitle = titleRef.current.value;
-
-    // if (!bodyText || !newTitle) {
-    //   window.alert("Please fill all fields");
-    //   return;
-    // }
-
-    if (bodyText === "<p><br></p>" || !bodyText) {
-      setTextFieldIsEmpty(true);
-      errorMessage = (
-        <p className={classes.errorText}>This field should not be blank</p>
-      );
-      return;
-    } else {
-      setTextFieldIsEmpty(false);
-    }
 
     if (isEditState) {
       const updatedPost = {
@@ -96,25 +79,13 @@ function Write() {
         updatedPost.categories = cats;
       }
 
-      if (selectedFile) {
-        const data = new FormData();
-        const filename = Date.now() + selectedFile.name;
-        data.append("name", filename);
-        data.append("file", selectedFile);
-        updatedPost.photo = filename;
-        if (!bodyText || !newTitle) {
-          // window.alert("Please fill all fields");
-          // return;
-        } else {
-          uploadImageQuery({
-            url: `${BASE_URL}/upload`,
-            method: "POST",
-            body: data,
-          });
+      if (previewSource) {
+        imageUpload(previewSource, isEditState, updatedPost);
+        return;
+      } else {
+        if (bodyText && newTitle) {
+          ctx.updatePost(updatedPost);
         }
-      }
-      if (bodyText && newTitle) {
-        ctx.updatePost(updatedPost);
       }
     } else {
       const newPost = {
@@ -129,58 +100,74 @@ function Write() {
         newPost.categories = cats;
       }
 
-      if (selectedFile) {
-        const data = new FormData();
-        const filename = Date.now() + selectedFile.name;
-        data.append("name", filename);
-        data.append("file", selectedFile);
-        newPost.photo = filename;
-        if (!bodyText || !newTitle) {
-          window.alert("Please fill all fields");
-          return;
-        } else {
-          uploadImageQuery({
-            url: `${BASE_URL}/upload`,
-            method: "POST",
-            body: data,
-          });
-        }
+      if (previewSource) {
+        imageUpload(previewSource, isEditState, newPost);
+        return;
+      } else {
+        ctx.createPost(newPost);
       }
-      //  else {
-      ctx.createPost(newPost);
-      console.log(newPost);
-      // localStorage.setItem("testData", JSON.stringify(rawBodyText));
-      // localStorage.setItem("pData", JSON.stringify(newPost));
-      // }
+
+    }
+  };
+  
+  const imageUpload = async (base64EncodedImage, state, payload) => {
+    try {
+      const res = await fetch(`${BASE_URL}/image`, {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-type": "application/json" },
+      });
+      const data = await res.json();
+
+      payload.photo = data.msg.url;
+	  
+
+      if (state) {
+        ctx.updatePost(payload);
+      } else {
+        ctx.createPost(payload);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const changeHandler = (e) => {
-    const x = e.target.files[0].name;
+    const x = e.target.files[0];
+    // const x = e.target.files[0].name;
     const y = /\.(jpg|JPG|jpeg|JPEG|png|PNG|)$/;
 
-    if (x.match(y)) {
-      setSelectedFile(e.target.files[0]);
+    if (x.name.match(y)) {
+      previewFile(x);
     } else {
       window.alert("Only images allowed");
     }
   };
+  
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
 
   let pic;
   if (postId) {
-    pic = publicFolder + post.photo;
+    pic = post?.photo;
     if (!post.photo) {
       pic =
         "https://presentageministries.org/wp-content/uploads/2019/07/placeholder.png";
     }
-    if (selectedFile) {
-      pic = URL.createObjectURL(selectedFile);
+    if (previewSource) {
+      pic = previewSource;
     }
+    
   } else {
     pic =
       "https://presentageministries.org/wp-content/uploads/2019/07/placeholder.png";
-    if (selectedFile) {
-      pic = URL.createObjectURL(selectedFile);
+    if (previewSource) {
+      pic = previewSource;
     }
   }
 
@@ -201,6 +188,7 @@ function Write() {
             accept=".jpg, .JPG, .jpeg, .JPEG, .png, .PNG"
             style={{ display: "none" }}
             onChange={changeHandler}
+			value={fileInputState}
           />
           <input
             type="text"
@@ -220,19 +208,7 @@ function Write() {
             inner={(text) => setRawBodyText(text)}
             required
           />
-          {/* <Draftail
-          placeholder={!isEditState ? "Tell your story..." : ""}
-          defaultValue={isEditState ? bodyText : ""}
-          value={(enteredText) => setBodyText(enteredText)}
-        /> */}
-          {/* <MyEditor
-            placeholder={!isEditState ? "Tell your story..." : ""}
-            defaultValue={isEditState ? bodyText : ""}
-            value={(enteredText) => setBodyText(enteredText)}
-            inner={(text) => setInner(text)}
-          /> */}
-          {/* <RichEditor /> */}
-          {/* <AltEditor /> */}
+        
           {textFieldIsEmpty && errorMessage}
           <div className={classes.selectGroup}>
             <Select
@@ -253,7 +229,7 @@ function Write() {
           </div>
         </div>
         <div className={classes.actions}>
-          <button>Publish</button>
+          <button type="submit">Publish</button>
         </div>
       </form>
     </Card>
