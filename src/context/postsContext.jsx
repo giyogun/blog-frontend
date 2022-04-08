@@ -29,7 +29,7 @@ const PostsContext = React.createContext({
   deregister: () => {},
 });
 
-// const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = url;
 
 const capitalize = (text) => {
   const result = text.charAt(0).toUpperCase() + text.slice(1);
@@ -108,7 +108,7 @@ export const PostsProvider = (props) => {
       if (res.statusText === "OK") {
         setIsLoading(true);
         console.log("Post Deleted");
-        queryPosts({ method: "GET", url: `/api/posts` });
+        queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
         history.replace("/");
       }
       setIsLoading(false);
@@ -172,7 +172,7 @@ export const PostsProvider = (props) => {
     if (res.statusText === "OK") {
       logoutHandler();
       console.log("User Deleted");
-      queryPosts({ method: "GET", url: `/api/posts` });
+      queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
       // history.push("/register");
       setIsLoading(false);
     }
@@ -181,24 +181,24 @@ export const PostsProvider = (props) => {
   const { queryPosts: deleteUserQuery } = useApiCall(deregistration);
 
   useEffect(() => {
-    queryPosts({ method: "GET", url: `/api/posts` });
+    queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
   }, [queryPosts]);
 
   useEffect(() => {
-    getCats({ method: "GET", url: `/api/categories` });
+    getCats({ method: "GET", url: `${BASE_URL}/categories` });
   }, [getCats]);
 
   const getPostsByUserHandler = (name) => {
     queryPostByUser({
       method: "GET",
-      url: `/api/posts?user=${name}`,
+      url: `${BASE_URL}/posts?user=${name}`,
     });
   };
 
   const createPostHandler = (config) => {
     createPostQuery({
       method: "POST",
-      url: `/api/posts/`,
+      url: `${BASE_URL}/posts/`,
       body: config,
     });
   };
@@ -207,7 +207,7 @@ export const PostsProvider = (props) => {
     setIsLoading(true);
     updatePostQuery({
       method: "PUT",
-      url: `/api/posts/${config.id}`,
+      url: `${BASE_URL}/posts/${config.id}`,
       body: config,
     });
   };
@@ -216,7 +216,7 @@ export const PostsProvider = (props) => {
     // setIsLoading(true);
     deletePostQuery({
       method: "DELETE",
-      url: `/api/posts/${config.id}`,
+      url: `${BASE_URL}/posts/${config.id}`,
       body: config,
     });
   };
@@ -224,7 +224,7 @@ export const PostsProvider = (props) => {
   const registrationHandler = (username, email, password) => {
     // setIsLoading(true);
     registerQuery({
-      url: `/api/auth/register`,
+      url: `${BASE_URL}/auth/register`,
       method: "POST",
       body: {
         username,
@@ -238,7 +238,7 @@ export const PostsProvider = (props) => {
     userLogin({
       method: "POST",
       body: { username, password: pass },
-      url: `/api/auth/login`,
+      url: `${BASE_URL}/auth/login`,
     });
   };
 
@@ -249,15 +249,15 @@ export const PostsProvider = (props) => {
 
   const filterPostsHandler = (category) => {
     setIsLoading(true);
-    filterPosts({ method: "GET", url: `/api/posts` }, category);
+    filterPosts({ method: "GET", url: `${BASE_URL}/posts` }, category);
   };
 
   const searchPostsHandler = (enteredText) => {
-    postsSearch({ method: "GET", url: `/api/posts` }, null, enteredText);
+    postsSearch({ method: "GET", url: `${BASE_URL}/posts` }, null, enteredText);
   };
 
   const resetPostsHandler = () => {
-    queryPosts({ method: "GET", url: `/api/posts` });
+    queryPosts({ method: "GET", url: `${BASE_URL}/posts` });
     setPosts1([]);
   };
 
@@ -266,14 +266,14 @@ export const PostsProvider = (props) => {
   };
 
   const getCategoriesHandler = () => {
-    getCats({ method: "GET", url: `/api/categories` });
+    getCats({ method: "GET", url: `${BASE_URL}/categories` });
   };
 
   const deleteUserHandler = (config) => {
     setIsLoading(true);
     deleteUserQuery({
       method: "DELETE",
-      url: `/api/users/${config.id}`,
+      url: `${BASE_URL}/users/${config.id}`,
       body: config,
     });
   };

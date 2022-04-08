@@ -4,7 +4,7 @@ import PostsContext from "./context/postsContext";
 import Home from "./pages/home/Home";
 import Navbar from "./pages/home/Navbar";
 import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+// import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import "./App.css";

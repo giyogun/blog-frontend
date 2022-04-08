@@ -70,7 +70,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `/api/users/${ls._id}`,
+        url: `${BASE_URL}/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });
@@ -115,7 +115,7 @@ const Settings = () => {
       data.append("file", selectedFile);
       newUserInfo.profilePic = filename;
       uploadImageQuery({
-        url: `/api/upload`,
+        url: `${BASE_URL}/upload`,
         method: "POST",
         body: data,
       });
@@ -126,7 +126,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `/api/users/${ls._id}`,
+        url: `${BASE_URL}/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });

@@ -47,7 +47,7 @@ const Sidebar = () => {
     if (arr) {
       queryPosts({
         method: "GET",
-        url: `/api/posts/${arr}`,
+        url: `${BASE_URL}/posts/${arr}`,
       });
     }
   }, [queryPosts, arr]);
@@ -56,7 +56,7 @@ const Sidebar = () => {
     if (post.userId) {
       queryUser({
         method: "GET",
-        url: `/api/users/${post.userId}`,
+        url: `${BASE_URL}/users/${post.userId}`,
       });
     } else {
       return;

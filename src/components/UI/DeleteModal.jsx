@@ -44,7 +44,7 @@ const ModalOverlay = () => {
     } else {
       singlePostQuery({
         method: "GET",
-        url: `/api/posts/${postId}`,
+        url: `${BASE_URL}/posts/${postId}`,
       });
       setMessage("this post");
       setIsPost(true);

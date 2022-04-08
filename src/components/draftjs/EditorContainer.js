@@ -34,7 +34,7 @@ const EditorContainer = ({ defaultValue, placeholder, value, inner }) => {
     if (postId) {
       singlePostQuery({
         method: "GET",
-        url: `/api/posts/${postId}`,
+        url: `${BASE_URL}/posts/${postId}`,
       });
     }
   }, [singlePostQuery, postId]);

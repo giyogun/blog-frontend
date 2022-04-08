@@ -56,7 +56,7 @@ function Write() {
     if (postId) {
       singlePostQuery({
         method: "GET",
-        url: `/api/posts/${postId}`,
+        url: `${BASE_URL}/posts/${postId}`,
       });
     }
   }, [singlePostQuery, postId]);
@@ -107,7 +107,7 @@ function Write() {
           // return;
         } else {
           uploadImageQuery({
-            url: `/api/upload`,
+            url: `${BASE_URL}/upload`,
             method: "POST",
             body: data,
           });
@@ -140,7 +140,7 @@ function Write() {
           return;
         } else {
           uploadImageQuery({
-            url: `/api/upload`,
+            url: `${BASE_URL}/upload`,
             method: "POST",
             body: data,
           });
