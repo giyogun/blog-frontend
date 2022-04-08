@@ -60,7 +60,7 @@ const Post = () => {
             {post.photo && (
               <img
                 className={classes.postImg}
-                src={publicFolder + post.photo}
+                src={post?.photo}
                 alt=""
               />
             )}
