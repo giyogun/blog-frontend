@@ -1,20 +1,18 @@
 import React, { useCallback, useContext, useRef, useState } from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
 import classes from "./Settings.module.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { ImUser } from "react-icons/im";
 import useApiCall from "../../hooks/useApiCall";
 import DeleteModal from "../../components/UI/DeleteModal";
 import PostsContext from "../../context/postsContext";
-import url from "../../components/assets/backendUrl";
-
-const BASE_URL = url;
 
 const Settings = () => {
   const ctx = useContext(PostsContext);
   const ls = JSON.parse(localStorage.getItem("user"));
   const { profilePic } = ls;
   const [selectedFile, setSelectedFile] = useState(null);
+  const [previewSource, setPreviewSource] = useState();
+  const [fileInputState, setFileInputState] = useState("");
   const [ppIsValid, setPpIsValid] = useState(!!profilePic);
   const [bio, setBio] = useState("");
   const [inner, setInner] = useState(false);
@@ -24,7 +22,7 @@ const Settings = () => {
   const twitterRef = useRef();
   const facebookRef = useRef();
   const linkedInRef = useRef();
-  const publicFolder = "/images/";
+  // const publicFolder = "http://localhost:5000/images/";
 
   const userUpdate = useCallback((res) => {
     if (res.statusText === "OK") {
@@ -33,23 +31,28 @@ const Settings = () => {
     }
   }, []);
 
-  const uploadImg = useCallback((res) => {
-    console.log(res);
-  }, []);
-
   const { queryPosts } = useApiCall(userUpdate);
-  const { queryPosts: uploadImageQuery } = useApiCall(uploadImg);
 
   const picChangeHandler = (e) => {
-    const x = e.target.files[0].name;
-    const y = /\.(jpg|JPG|jpeg|JPEG|png|PNG|)$/;
+    const x = e.target.files[0];
+    // const y = /\.(jpg|JPG|jpeg|JPEG|png|PNG|)$/;
 
-    if (x.match(y)) {
-      setSelectedFile(e.target.files[0]);
-      setPpIsValid(true);
-    } else {
-      window.alert("Only images allowed");
-    }
+    previewFile(x);
+
+    // if (x.match(y)) {
+    //   setSelectedFile(e.target.files[0]);
+    //   setPpIsValid(true);
+    // } else {
+    //   window.alert("Only images allowed");
+    // }
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
   };
 
   const updateInfoHandler = (e) => {
@@ -70,7 +73,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `${BASE_URL}/users/${ls._id}`,
+        url: `http://localhost:5000/api/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });
@@ -78,7 +81,7 @@ const Settings = () => {
     console.log(ppIsValid);
   };
 
-  const profileHandler = (e) => {
+  const profileHandler = async (e) => {
     e.preventDefault();
 
     const twitter = twitterRef.current.value;
@@ -107,37 +110,55 @@ const Settings = () => {
     if (!!linkedIn) {
       newUserInfo.linkedInAcct = linkedIn;
     }
+    if (previewSource) {
+      try {
+        const res = await fetch("http://localhost:5000/api/image", {
+          method: "POST",
+          body: JSON.stringify({ data: previewSource }),
+          headers: { "Content-type": "application/json" },
+        });
+        const data = await res.json();
 
-    if (selectedFile) {
-      const data = new FormData();
-      const filename = Date.now() + selectedFile.name;
-      data.append("name", filename);
-      data.append("file", selectedFile);
-      newUserInfo.profilePic = filename;
-      uploadImageQuery({
-        url: `${BASE_URL}/upload`,
-        method: "POST",
-        body: data,
-      });
+        newUserInfo.profilePic = data.msg.url;
+
+        const canMakePostReq =
+          !!bio || !!twitter || facebook || linkedIn || previewSource;
+
+        if (canMakePostReq) {
+          queryPosts({
+            url: `http://localhost:5000/api/users/${ls._id}`,
+            method: "PUT",
+            body: newUserInfo,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
 
-    const canMakePostReq =
-      !!bio || !!twitter || facebook || linkedIn || selectedFile;
-
-    if (canMakePostReq) {
-      queryPosts({
-        url: `${BASE_URL}/users/${ls._id}`,
-        method: "PUT",
-        body: newUserInfo,
-      });
-    }
+    // if (selectedFile) {
+    //   const data = new FormData();
+    //   const filename = Date.now() + selectedFile.name;
+    //   data.append("name", filename);
+    //   data.append("file", selectedFile);
+    //   newUserInfo.profilePic = filename;
+    //   uploadImageQuery({
+    //     url: `http://localhost:5000/api/upload`,
+    //     method: "POST",
+    //     body: data,
+    //   });
+    // }
   };
 
-  let picSrc = publicFolder + ls.profilePic;
+  let picSrc = ls.profilePic;
 
-  if (selectedFile) {
-    picSrc = URL.createObjectURL(selectedFile);
+  if (previewSource) {
+    picSrc = previewSource;
   }
+
+  // if (selectedFile) {
+  //   picSrc = URL.createObjectURL(selectedFile);
+  // }
   return (
     <div className={classes.settings}>
       {ctx.modalIsShown && <DeleteModal />}
@@ -162,6 +183,7 @@ const Settings = () => {
               style={{ display: "none" }}
               accept=".jpg, .JPG, .jpeg, .JPEG, .png, .PNG"
               onChange={picChangeHandler}
+              value={fileInputState}
             />
           </div>
           <label>Public Bio</label>
