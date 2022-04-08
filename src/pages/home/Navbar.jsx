@@ -32,7 +32,7 @@ const Navbar = () => {
     if (ls.profilePic) {
       profilePic = (
         <img
-          src={publicFolder + ls.profilePic}
+          src={ls?.profilePic}
           alt="profile"
           className="topImg"
         />
