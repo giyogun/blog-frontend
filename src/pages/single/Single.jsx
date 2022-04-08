@@ -20,14 +20,12 @@ const Single = () => {
       if (res.data !== null) {
         setPost(res.data);
         localStorage.setItem("postInfo", JSON.stringify(res.data));
-        console.log(res);
         setPageIsFound(true);
       } else if (res.data === null) {
         window.location.replace("/not-found");
       }
     } else {
       setPageIsFound(false);
-      console.log(res);
       window.location.replace("/not-found");
     }
   }, []);
