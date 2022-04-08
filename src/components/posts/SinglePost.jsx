@@ -99,7 +99,7 @@ const SinglePost = ({ singlePost: post, id: postId }) => {
           {post.photo && (
             <img
               className={classes.singlePostImg}
-              src={publicFolder + post.photo}
+              src={post?.photo}
               alt=""
             />
           )}
