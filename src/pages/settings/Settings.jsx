@@ -35,16 +35,15 @@ const Settings = () => {
 
   const picChangeHandler = (e) => {
     const x = e.target.files[0];
-    // const y = /\.(jpg|JPG|jpeg|JPEG|png|PNG|)$/;
+    const y = /\.(jpg|JPG|jpeg|JPEG|png|PNG|)$/;
 
-    previewFile(x);
-
-    // if (x.match(y)) {
-    //   setSelectedFile(e.target.files[0]);
-    //   setPpIsValid(true);
-    // } else {
-    //   window.alert("Only images allowed");
-    // }
+   if (x.name.match(y)) {
+      setSelectedFile(e.target.files[0]);
+      setPpIsValid(true);
+	  previewFile(x);
+    } else {
+      window.alert("Only images allowed");
+    }
   };
 
   const previewFile = (file) => {

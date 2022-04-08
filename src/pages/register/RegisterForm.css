@@ -52,7 +52,7 @@
   background-color: rgb(232, 253, 253);
 }
 
-.errorText {
+p.errorText {
   color: #b40e0e;
   margin-top: 10px;
 }
