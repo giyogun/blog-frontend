@@ -17,8 +17,6 @@ function Write() {
   const ctx = useContext(PostsContext);
   const [previewSource, setPreviewSource] = useState();
   const [fileInputState, setFileInputState] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
-  const [imgRes, setImgRes] = useState({});
   const location = useLocation();
   const history = useHistory();
   const [post, setPost] = useState({});
@@ -64,11 +62,25 @@ function Write() {
 
   const postHandler = (e) => {
     e.preventDefault();
-    const newTitle = titleRef.current.value;
+    const title = titleRef.current.value;
+    let formIsValid = !!bodyText && bodyText !== "<p><br></p>" && !!title;
+
+    let a = "";
+    rawBodyText?.blocks.forEach((r) => {
+      a += r.text;
+    });
+
+    if (!formIsValid) {
+      window.alert("Please fill all fields");
+      return;
+    } else if (a.trim() === "") {
+      window.alert("Please enter some text");
+      return;
+    }
 
     if (isEditState) {
       const updatedPost = {
-        title: newTitle,
+        title: title,
         description: bodyText,
         rawDescription: JSON.stringify(rawBodyText),
         id: post._id,
@@ -83,13 +95,12 @@ function Write() {
         imageUpload(previewSource, isEditState, updatedPost);
         return;
       } else {
-        if (bodyText && newTitle) {
-          ctx.updatePost(updatedPost);
-        }
+        ctx.updatePost(updatedPost);
+        
       }
     } else {
       const newPost = {
-        title: newTitle,
+        title: title,
         description: bodyText,
         rawDescription: JSON.stringify(rawBodyText),
         username: ls.username,
@@ -105,8 +116,8 @@ function Write() {
         return;
       } else {
         ctx.createPost(newPost);
+        console.log(newPost);
       }
-
     }
   };
   
@@ -205,7 +216,7 @@ function Write() {
             placeholder={!isEditState ? "Tell your story..." : ""}
             defaultValue={isEditState ? bodyText : ""}
             value={(enteredText) => setBodyText(enteredText)}
-            inner={(text) => setRawBodyText(text)}
+            inner={useCallback((text) => setRawBodyText(text), [])}
             required
           />
         

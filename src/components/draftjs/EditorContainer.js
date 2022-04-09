@@ -21,23 +21,34 @@ const EditorContainer = ({ defaultValue, placeholder, value, inner }) => {
 
   const getOnePost = useCallback((res) => {
     if (res.statusText === "OK") {
-      const raw = res.data;
-      const toJSON = JSON.parse(raw.rawDescription);
-      const content = convertFromRaw(toJSON);
-      setEditorState(EditorState.createWithContent(content));
-    }
-  }, []);
+        const raw = res.data;
+        const toJSON = JSON.parse(raw.rawDescription);
+        const content = convertFromRaw(toJSON);
+        const b = EditorState.createWithContent(content).getCurrentContent();
+        inner(convertToRaw(b));
+        setEditorState(EditorState.createWithContent(content));
+      }
+  }, [inner]);
 
   const { queryPosts: singlePostQuery } = useApiCall(getOnePost);
 
   useEffect(() => {
-    if (postId) {
+    let mounted = !!postId;
+    if (mounted) {
       singlePostQuery({
         method: "GET",
         url: `${BASE_URL}/posts/${postId}`,
       });
     }
+    return () => {
+      mounted = false;
+    };
   }, [singlePostQuery, postId]);
+  
+  useEffect(() => {
+    const html = stateToHTML(editorState.getCurrentContent());
+    value(html);
+  }, [editorState, value]);
 
   const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -57,9 +68,7 @@ const EditorContainer = ({ defaultValue, placeholder, value, inner }) => {
       placeholder={placeholder}
       defaultValue={defaultValue}
       wrapperClassName="demo-wrapper"
-      onChange={(e) => {
-        let html = stateToHTML(editorState.getCurrentContent());
-        value(html);
+      onChange={() => {
         const raw = convertToRaw(editorState.getCurrentContent());
         inner(raw);
       }}
