@@ -5,6 +5,9 @@ import { ImUser } from "react-icons/im";
 import useApiCall from "../../hooks/useApiCall";
 import DeleteModal from "../../components/UI/DeleteModal";
 import PostsContext from "../../context/postsContext";
+import url from "../../components/assets/backendUrl";
+
+const BASE_URL = url;
 
 const Settings = () => {
   const ctx = useContext(PostsContext);
@@ -72,7 +75,7 @@ const Settings = () => {
 
     if (canMakePostReq) {
       queryPosts({
-        url: `http://localhost:5000/api/users/${ls._id}`,
+        url: `${BASE_URL}/users/${ls._id}`,
         method: "PUT",
         body: newUserInfo,
       });
@@ -111,7 +114,7 @@ const Settings = () => {
     }
     if (previewSource) {
       try {
-        const res = await fetch("http://localhost:5000/api/image", {
+        const res = await fetch(`${BASE_URL}/image`, {
           method: "POST",
           body: JSON.stringify({ data: previewSource }),
           headers: { "Content-type": "application/json" },
@@ -125,7 +128,7 @@ const Settings = () => {
 
         if (canMakePostReq) {
           queryPosts({
-            url: `http://localhost:5000/api/users/${ls._id}`,
+            url: `${BASE_URL}/users/${ls._id}`,
             method: "PUT",
             body: newUserInfo,
           });
