@@ -232,7 +232,6 @@ function Write() {
                 setCats(e);
                 if (e.length === 2) setIsMaxedOut(true);
                 if (e.length < 2) setIsMaxedOut(false);
-                console.log(ctx.categories);
               }}
               noOptionsMessage={() => "Maximum of two options allowed"}
               defaultValue={post?.categories}
