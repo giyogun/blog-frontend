@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { useHistory, useLocation } from "react-router";
+import { Helmet } from "react-helmet";
 import EditorContainer from "../../components/draftjs/EditorContainer";
 import PostsContext from "../../context/postsContext";
 import useApiCall from "../../hooks/useApiCall";
@@ -184,6 +185,9 @@ function Write() {
 
   return (
     <Card>
+	<Helmet>
+        <title>The Infotainment Hub | Write</title>
+      </Helmet>
       <div className={classes.control}>
         <img src={pic} alt="article header" className={classes.writeImg} />
       </div>

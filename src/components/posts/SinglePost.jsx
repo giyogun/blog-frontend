@@ -8,6 +8,7 @@ import React, {
 import classes from "./SinglePost.module.css";
 import { RiEditLine, RiDeleteBin5Line } from "react-icons/ri";
 import { useHistory, useParams } from "react-router";
+import { Helmet } from "react-helmet";
 import PostsContext from "../../context/postsContext";
 import useApiCall from "../../hooks/useApiCall";
 import { Link } from "react-router-dom";
@@ -94,6 +95,9 @@ const SinglePost = ({ singlePost: post, id: postId }) => {
 
   return (
     <Fragment>
+	<Helmet>
+        <title>{post.title}</title>
+      </Helmet>
       <div className={classes.singlePost}>
         <div className={classes.singlePostWrapper}>
           {post.photo && (

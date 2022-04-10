@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router";
 import PostsContext from "../../context/postsContext";
 import useClientVal from "../../hooks/useClientVal";
@@ -127,6 +128,9 @@ const RegisterForm = () => {
 
   return (
     <div className="reg">
+	  <Helmet>
+        <title>The Infotainment Hub | Register</title>
+      </Helmet>
       <form className="regForm" onSubmit={submitHandler}>
         <h1>Create Account</h1>
         <hr />

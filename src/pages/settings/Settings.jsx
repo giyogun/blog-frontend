@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useRef, useState } from "react";
 import classes from "./Settings.module.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { ImUser } from "react-icons/im";
+import { Helmet } from "react-helmet";
 import useApiCall from "../../hooks/useApiCall";
 import DeleteModal from "../../components/UI/DeleteModal";
 import PostsContext from "../../context/postsContext";
@@ -164,6 +165,9 @@ const Settings = () => {
   return (
     <div className={classes.settings}>
       {ctx.modalIsShown && <DeleteModal />}
+	  <Helmet>
+        <title>The Infotainment Hub | Settings</title>
+      </Helmet>
       <div className={classes.settingsWrapper}>
         <div className={classes.settingsTitle}>
           <span className={classes.settingsUpdateTitle}>My Profile</span>

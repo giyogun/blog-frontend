@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
+import { Helmet } from "react-helmet";
 import PostsContext from "../../context/postsContext";
 import classes from "./Login.module.css";
 
@@ -29,6 +30,9 @@ const Login = () => {
 
   return (
     <div className={classes.login}>
+	<Helmet>
+        <title>The Infotainment Hub | Login</title>
+      </Helmet>
       <span className={classes.loginTitle}>Login</span>
       <form className={classes.loginForm} onSubmit={loginHandler}>
         <label>Username</label>
