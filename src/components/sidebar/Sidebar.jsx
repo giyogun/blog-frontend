@@ -29,7 +29,6 @@ const Sidebar = () => {
 
   const singleUser = useCallback((res) => {
     setUserData(res.data);
-    // console.log(res);
   }, []);
   const { queryPosts: queryUser } = useApiCall(singleUser);
 
@@ -38,7 +37,6 @@ const Sidebar = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const publicFolder = "/images/";
   const { pathname } = location;
 
   const arr = pathname.split("/")[2];
@@ -119,7 +117,7 @@ const Sidebar = () => {
             <img
               src={
                 arr && userData.profilePic
-                  ? publicFolder + userData?.profilePic
+                  ? userData?.profilePic
                   : "https://themegoods-cdn-pzbycso8wng.stackpathdns.com/grandblog/demo/wp-content/uploads/2015/11/aboutme.jpg"
               }
               alt=""
@@ -135,9 +133,9 @@ const Sidebar = () => {
                 key={c._id}
                 className={classes.sidebarListItem}
                 onClick={() => {
-                  history.push(`/?cat=${c.name}`);
+                  history.push(`/?cat=${c.label}`);
 
-                  filterPosts(c.name);
+                  filterPosts(c.label);
                 }}
               >
                 {c.label}

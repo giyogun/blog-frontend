@@ -47,6 +47,10 @@ const Post = () => {
     ctx.filterPosts(cat);
     history.push(`?cat=${cat}`);
   };
+  
+    if (ctx.blogPosts.length === 0) {
+    return <p style={{textAlign: "center", padding: "10px"}}>No posts in this category yet</p>
+  }
 
   return (
     <Fragment>
@@ -70,7 +74,7 @@ const Post = () => {
                   <span
                     key={index}
                     className={classes.postCat}
-                    onClick={() => filterPostsHandler(c)}
+                    onClick={() => filterPostsHandler(c.label)}
                   >
                     {c.label}
                   </span>

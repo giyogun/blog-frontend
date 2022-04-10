@@ -120,8 +120,8 @@ export const PostsProvider = (props) => {
   const { queryPosts: deletePostQuery } = useApiCall(deleteSinglePost);
 
   const filterAllPosts = useCallback((res, cat) => {
-    const filteredPosts = res.data.filter((m) => m.categories.includes(cat));
-
+    setIsLoading(true)
+    const filteredPosts = res.data.filter(c => c.categories.find(m => m.label === cat));
     setPosts(filteredPosts);
     setIsLoading(false);
   }, []);
@@ -248,7 +248,6 @@ export const PostsProvider = (props) => {
   };
 
   const filterPostsHandler = (category) => {
-    setIsLoading(true);
     filterPosts({ method: "GET", url: `${BASE_URL}/posts` }, category);
   };
 
