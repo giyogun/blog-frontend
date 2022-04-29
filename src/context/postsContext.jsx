@@ -10,7 +10,7 @@ const PostsContext = React.createContext({
   isLoggedIn: false,
   isLoading: true,
   modalIsShown: true,
-  // post: {},
+  filtered: true,
   error: null,
   categories: [],
   modal: () => {},
@@ -47,6 +47,7 @@ export const PostsProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!ls);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [postIsFiltered, setPostIsFiltered] = useState(false);
   const history = useHistory();
 
   const getAllCats = useCallback((res) => {
@@ -85,6 +86,7 @@ export const PostsProvider = (props) => {
   const { queryPosts: updatePostQuery } = useApiCall(updatePostFunc);
 
   const getAllPosts = useCallback((res) => {
+    setPostIsFiltered(false);
     if (res.statusText === "OK") {
       const reverse = res.data.reverse();
       setPosts(reverse);
@@ -122,7 +124,7 @@ export const PostsProvider = (props) => {
   const filterAllPosts = useCallback((res, cat) => {
     setIsLoading(true)
     const filteredPosts = res.data.filter(c => c.categories.find(m => m.label === cat));
-    setPosts(filteredPosts.revers());
+    setPosts(filteredPosts.reverse());
     setIsLoading(false);
   }, []);
 
@@ -248,6 +250,7 @@ export const PostsProvider = (props) => {
   };
 
   const filterPostsHandler = (category) => {
+    setPostIsFiltered(true);
     filterPosts({ method: "GET", url: `${BASE_URL}/posts` }, category);
   };
 
@@ -287,7 +290,7 @@ export const PostsProvider = (props) => {
     isLoggedIn: isLoggedIn,
     isLoading: isLoading,
     modalIsShown: showModal,
-    // post: singlePost,
+    filtered: postIsFiltered,
     error: errorMessage,
     categories: cats,
     modal: modalHandler,

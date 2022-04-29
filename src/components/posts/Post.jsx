@@ -34,22 +34,22 @@ const postDateHandler = (x) => {
   return displayedDate;
 };
 
-const BASE_URL = url;
-
 const Post = () => {
   const ctx = useContext(PostsContext);
 
   const history = useHistory();
 
-  const publicFolder = "/images/";
-
   const filterPostsHandler = (cat) => {
     ctx.filterPosts(cat);
     history.push(`?cat=${cat}`);
   };
-  
-    if (ctx.blogPosts.length === 0) {
-    return <p style={{textAlign: "center", padding: "10px"}}>No posts in this category yet</p>
+
+  if (ctx.filtered && ctx.blogPosts.length === 0) {
+    return (
+      <p style={{ textAlign: "center", padding: "10px" }}>
+        No posts in this category yet
+      </p>
+    );
   }
 
   return (
@@ -62,11 +62,7 @@ const Post = () => {
         return (
           <div className={classes.post} key={post._id}>
             {post.photo && (
-              <img
-                className={classes.postImg}
-                src={post?.photo}
-                alt=""
-              />
+              <img className={classes.postImg} src={post?.photo} alt="" />
             )}
             <div className={classes.postInfo}>
               <div className={classes.postCats}>
