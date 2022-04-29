@@ -122,7 +122,7 @@ export const PostsProvider = (props) => {
   const filterAllPosts = useCallback((res, cat) => {
     setIsLoading(true)
     const filteredPosts = res.data.filter(c => c.categories.find(m => m.label === cat));
-    setPosts(filteredPosts);
+    setPosts(filteredPosts.revers());
     setIsLoading(false);
   }, []);
 

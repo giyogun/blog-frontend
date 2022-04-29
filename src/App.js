@@ -16,45 +16,35 @@ function App() {
   const ctx = useContext(PostsContext);
   return (
     <Fragment>
-      {ctx.isLoading ? (
-        <div className="loading"></div>
-      ) : (
-        <div>
-          <Navbar />
-          <Suspense fallback={<div className="loading"></div>}>
-            <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
-              <Route path="/register">
-                {ctx.isLoggedIn ? (
-                  <Redirect to="/settings" />
-                ) : (
-                  <RegisterForm />
-                )}
-              </Route>
-              <Route path="/login">
-                {!ctx.isLoggedIn ? <Login /> : <Redirect to="/write" />}
-              </Route>
-              <Route path="/settings" exact>
-                {ctx.isLoggedIn ? <Settings /> : <Redirect to="/login" />}
-              </Route>
-              <Route path="/posts/:postId">
-                <Single />
-              </Route>
-              <Route path="/write">
-                {ctx.isLoggedIn ? <Write /> : <Redirect to="/login" />}
-              </Route>
-              <Route path="/not-found">
-                <NotFound />
-              </Route>
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </Suspense>
-        </div>
-      )}
+      <Suspense fallback={<div className="loading"></div>}>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/register">
+            {ctx.isLoggedIn ? <Redirect to="/settings" /> : <RegisterForm />}
+          </Route>
+          <Route path="/login">
+            {!ctx.isLoggedIn ? <Login /> : <Redirect to="/write" />}
+          </Route>
+          <Route path="/settings" exact>
+            {ctx.isLoggedIn ? <Settings /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/posts/:postId">
+            <Single />
+          </Route>
+          <Route path="/write">
+            {ctx.isLoggedIn ? <Write /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/not-found">
+            <NotFound />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </Suspense>
     </Fragment>
   );
 }
